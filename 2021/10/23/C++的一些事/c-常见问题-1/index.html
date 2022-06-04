@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zerobot.top","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言收集一些关于c&#x2F;c++的常见问题，以备不时之需。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++常见问题---1">
+<meta property="og:url" content="https://www.zerobot.top/2021/10/23/C++%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/c-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-1/index.html">
+<meta property="og:site_name" content="ZEROBOT">
+<meta property="og:description" content="前言收集一些关于c&#x2F;c++的常见问题，以备不时之需。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-23T12:00:15.000Z">
+<meta property="article:modified_time" content="2022-06-02T15:09:42.000Z">
+<meta property="article:author" content="zerobot">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.zerobot.top/2021/10/23/C++%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/c-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.zerobot.top/2021/10/23/C++%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/c-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-1/","path":"2021/10/23/C++的一些事/c-常见问题-1/","title":"c++常见问题---1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>c++常见问题---1 | ZEROBOT</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZEROBOT</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">10</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">6</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">14</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-staic%E5%85%B3%E9%94%AE%E5%AD%97%E5%9C%A8C%E5%92%8CC-%E5%BD%93%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%82"><span class="nav-number">1.1.</span> <span class="nav-text">1.staic关键字在C和C++当中的作用以及它们之间的区别。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%9C%A8c%E5%BD%93%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">（1）在c当中的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%9C%A8c-%E5%BD%93%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">（2）在c++当中的作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-C-%E4%B8%AD%E7%9A%84NULL%E5%92%8Cnullptr%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">2.C++中的NULL和nullptr之间的区别是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89C%E4%B8%AD%E7%9A%84NULL"><span class="nav-number">1.2.1.</span> <span class="nav-text">（1）C中的NULL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89C-%E4%B8%AD%E7%9A%84NULL"><span class="nav-number">1.2.2.</span> <span class="nav-text">（2）C++中的NULL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89C-%E4%B8%AD%E7%9A%84nullptr"><span class="nav-number">1.2.3.</span> <span class="nav-text">（3）C++中的nullptr</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#nullptr%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">nullptr的使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-void-%E6%8C%87%E9%92%88%E3%80%82"><span class="nav-number">1.3.</span> <span class="nav-text">3.void*指针。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%BB%BB%E4%BD%95%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%8C%87%E9%92%88%E9%83%BD%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E8%B5%8B%E5%80%BC%E7%BB%99void%E6%8C%87%E9%92%88%EF%BC%8C-%E4%B8%94%E6%97%A0%E9%9C%80%E8%BF%9B%E8%A1%8C%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E3%80%82"><span class="nav-number">1.3.1.</span> <span class="nav-text">（1）任何类型的指针都可以直接赋值给void指针， 且无需进行强制类型转换。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89void%E6%8C%87%E9%92%88%E5%B9%B6%E4%B8%8D%E8%83%BD%E6%97%A0%E9%9C%80%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E7%9B%B4%E6%8E%A5%E8%B5%8B%E5%80%BC%E7%BB%99%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B%EF%BC%8C%E5%A6%82%E6%9E%9C%E8%A6%81%E6%8A%8A-void-%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%8C%87%E9%92%88%E8%B5%8B%E5%80%BC%E7%BB%99%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%8C%E9%9C%80%E8%A6%81%E8%BF%9B%E8%A1%8C%E6%98%BE%E5%BC%8F%E8%BD%AC%E6%8D%A2%E3%80%82"><span class="nav-number">1.3.2.</span> <span class="nav-text">（2）void指针并不能无需类型转换直接赋值给其他类型，如果要把 void 类型的指针赋值给其他类型的指针，需要进行显式转换。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89void%E6%8C%87%E9%92%88%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%92%8C%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%AF%94%E8%BE%83%E6%8C%87%E9%92%88%E5%AD%98%E6%94%BE%E7%9A%84%E5%9C%B0%E5%9D%80%E5%80%BC%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C"><span class="nav-number">1.3.3.</span> <span class="nav-text">（3）void指针可以直接和其他类型的指针进行比较指针存放的地址值是否相同</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89void%E6%8C%87%E9%92%88%E5%8F%AA%E6%9C%89%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%90%8E%E6%89%8D%E5%8F%AF%E4%BB%A5%E6%AD%A3%E5%B8%B8%E5%AF%B9%E5%85%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.4.</span> <span class="nav-text">（4）void指针只有强制类型转换后才可以正常对其操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%885%EF%BC%89void%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F%E5%92%8C%E6%99%AE%E9%80%9A%E6%8C%87%E9%92%88%E4%B8%80%E6%A0%B7%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87-NULL-%E6%88%96-nullptr-%E6%9D%A5%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E8%A1%A8%E7%A4%BA%E4%B8%80%E4%B8%AA%E7%A9%BA%E6%8C%87%E9%92%88"><span class="nav-number">1.3.5.</span> <span class="nav-text">（5）void指针变量和普通指针一样可以通过 NULL 或 nullptr 来初始化，表示一个空指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%886%EF%BC%89%E5%BD%93void%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E7%9A%84%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E6%97%B6%EF%BC%8C%E8%A1%A8%E7%A4%BA%E5%8F%AF%E4%BB%A5%E6%8E%A5%E5%8F%97%E4%BB%BB%E6%84%8F%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BE%93%E5%85%A5%E6%8C%87%E9%92%88%E5%92%8C%E8%BE%93%E5%87%BA%E4%BB%BB%E6%84%8F%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%8C%87%E9%92%88"><span class="nav-number">1.3.6.</span> <span class="nav-text">（6）当void指针作为函数的输入和输出时，表示可以接受任意类型的输入指针和输出任意类型的指针</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-const%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8%E3%80%82"><span class="nav-number">1.4.</span> <span class="nav-text">4.const关键字的作用。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80-%E4%BD%9C%E7%94%A8%E5%A6%82%E4%B8%8B%E8%A1%A8%E6%89%80%E7%A4%BA%EF%BC%9A"><span class="nav-number">1.4.1.</span> <span class="nav-text">一. 作用如下表所示：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Const%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.2.</span> <span class="nav-text">二、Const的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%E3%80%81%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">1、定义常量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%E3%80%81%E6%8C%87%E9%92%88%E4%BD%BF%E7%94%A8COST"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">2、指针使用COST</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3%E3%80%81%E5%87%BD%E6%95%B0%E4%B8%AD%E4%BD%BF%E7%94%A8CONST"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">3、函数中使用CONST</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4%E3%80%81%E7%B1%BB%E7%9B%B8%E5%85%B3CONST"><span class="nav-number">1.4.2.4.</span> <span class="nav-text">4、类相关CONST</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%B0%86Const%E7%B1%BB%E5%9E%8B%E8%BD%AC%E5%8C%96%E4%B8%BA%E9%9D%9EConst%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.4.3.</span> <span class="nav-text">三、将Const类型转化为非Const类型的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BD%BF%E7%94%A8const%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">四、使用const的一些建议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E8%A1%A5%E5%85%85%E9%87%8D%E8%A6%81%E8%AF%B4%E6%98%8E"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">五、补充重要说明</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zerobot"
+      src="/images/qiaoba.jpg">
+  <p class="site-author-name" itemprop="name">zerobot</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Oreofilling" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Oreofilling" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://unpkg.com/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+  <a href="https://github.com/Oreofilling" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2021/10/23/C++%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/c-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/qiaoba.jpg">
+      <meta itemprop="name" content="zerobot">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZEROBOT">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="c++常见问题---1 | ZEROBOT">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          c++常见问题---1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-10-23 20:00:15" itemprop="dateCreated datePublished" datetime="2021-10-23T20:00:15+08:00">2021-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-06-02 23:09:42" itemprop="dateModified" datetime="2022-06-02T23:09:42+08:00">2022-06-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/c-%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/" itemprop="url" rel="index"><span itemprop="name">c++的一些事</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>收集一些关于c/c++的常见问题，以备不时之需。</p>
+<span id="more"></span>
+
+<h3 id="1-staic关键字在C和C-当中的作用以及它们之间的区别。"><a href="#1-staic关键字在C和C-当中的作用以及它们之间的区别。" class="headerlink" title="1.staic关键字在C和C++当中的作用以及它们之间的区别。"></a>1.staic关键字在C和C++当中的作用以及它们之间的区别。</h3><h4 id="（1）在c当中的作用"><a href="#（1）在c当中的作用" class="headerlink" title="（1）在c当中的作用"></a>（1）在c当中的作用</h4><ul>
+<li><p><strong>隐藏（对变量和函数）</strong></p>
+<p>在C语言中，static修饰的函数和变量具有只对本文件可见的作用，因此它具有对其他源文件隐藏的功能，利用这一特性可以在不同源文件定义同名函数和同名变量，从而不会引起命名冲突。</p>
+</li>
+<li><p><strong>保持变量持久，默认初始值为0（对变量）</strong></p>
+<p>也就是说，用static修饰的变量，生命周期是全局的，会一直存在到程序运行结束，但它的定义域还是跟普通变量一样。用static修饰的变量会存储在静态存储区，这里的变量会在程序刚开始运行的时候就进行初始化，也是唯一的一次初始化。同时静态存储区的字节默认初始值都为0x00，全局变量也存储在这里。</p>
+</li>
+</ul>
+<h4 id="（2）在c-当中的作用"><a href="#（2）在c-当中的作用" class="headerlink" title="（2）在c++当中的作用"></a>（2）在c++当中的作用</h4><ul>
+<li><p>当然static在C中的作用在C++中同样适用。</p>
+</li>
+<li><p>类的静态成员函数是属于整个类的而非某个对象,并且它没有this指针。由此引申出,它<strong>不能访问非静态数据和非静态成员函数,以及不能被声明为virtual、const、volatile</strong>。这几点需要对C++的内存模型有一定的理解才能明白。</p>
+</li>
+<li><p>类的静态数据成员同样是属于类的,对象都可以进行访问。<strong>初始化需要在类外进行。初始化格式：&lt;数据类型&gt;&lt;类名&gt;::&lt;静态数据成员名&gt;=&lt;值&gt;。</strong></p>
+</li>
+<li><p><strong>一个注意点</strong>：只有静态常量整型变量才可以在类里面初始化，其他都不行。</p>
+<p>在C++中，static静态成员变量不能在类的内部初始化。在类的内部只是声明，定义必须在类定义体的外部，通常在类的实现文件中初始化，如：double Account::Rate = 2.25;static关键字只能用于类定义体内部的声明中，定义时不能标示为static</p>
+<p>在C++中，const成员变量也不能在类定义处初始化，只能通过构造函数初始化列表进行，并且必须有构造函数。</p>
+<p>const数据成员 只在某个对象生存期内是常量，而对于整个类而言却是可变的。因为类可以创建多个对象，不同的对象其const数据成员的值可以不同。所以不能在类的声明中初始化const数据成员，因为类的对象没被创建时，编译器不知道const数据成员的值是什么。</p>
+<p>const数据成员的初始化只能在类的构造函数的初始化列表中进行。要想建立在整个类中都恒定的常量，应该用类中的枚举常量来实现，或者static cosnt。</p>
+</li>
+</ul>
+<h3 id="2-C-中的NULL和nullptr之间的区别是什么？"><a href="#2-C-中的NULL和nullptr之间的区别是什么？" class="headerlink" title="2.C++中的NULL和nullptr之间的区别是什么？"></a>2.C++中的NULL和nullptr之间的区别是什么？</h3><h4 id="（1）C中的NULL"><a href="#（1）C中的NULL" class="headerlink" title="（1）C中的NULL"></a>（1）C中的NULL</h4><p>在C语言中我们将NULL用作空指针之用，NULL在C语言中的定义如下：</p>
+<p><code>#define NULL    ((void *)0)</code></p>
+<p>可以看到，C语言中NULL是一个void*指针，我们常用其来对指针变量进行初始化赋值或者作为返回类型为指针的函数的返回值（如函数执行失败时）等等。</p>
+<h4 id="（2）C-中的NULL"><a href="#（2）C-中的NULL" class="headerlink" title="（2）C++中的NULL"></a>（2）C++中的NULL</h4><p>在C++中，NULL的定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">`/* Define NULL pointer value */</span><br><span class="line">#ifndef NULL</span><br><span class="line">    #ifdef __cplusplus</span><br><span class="line">        #define NULL    0</span><br><span class="line">    #else  /* __cplusplus */</span><br><span class="line">        #define NULL    ((void *)0)</span><br><span class="line">    #endif  /* __cplusplus */</span><br><span class="line">#endif  /* NULL */</span><br></pre></td></tr></table></figure>
+
+
+<p>可以看到，在C++中，NULL被定义为0，而不是(void*)0，为什么C++在NULL的定义上不继续兼容C延续(void*)0的定义呢？因为C++中不能将void<em>类型的指针隐式转换成其他指针类型，所以将NULL定义为(void</em>)0的话并不能起到空指针的作用，如以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void hello(char* a) &#123;</span><br><span class="line">    printf(&quot;char\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    void* a = (void*) 0;</span><br><span class="line">    char* b = a;     //在C中可以，C++不行</span><br><span class="line">    hello(b);        //在C中可以，C++不行</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>因为C++中不能将void<em>类型的指针隐式转换成其他指针类型，所以用(void</em><em>)0对其他类型指针赋初值是不行的。既然(void</em>)0不能起到空指针的作用，不如干脆将NULL定义为0，引入0来表示空指针，可以对各种类型的指针进行赋值。</p>
+<h4 id="（3）C-中的nullptr"><a href="#（3）C-中的nullptr" class="headerlink" title="（3）C++中的nullptr"></a>（3）C++中的nullptr</h4><p>用过C++的童鞋都知道C++中有个nullptr的关键字可以用作空指针，既然已经有了定义为0的NULL，为何还要nullptr呢？这是因为定义为0的NULL很容易引起混淆，尤其是函数重载调用时，比如说：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void hello(char* a) &#123;</span><br><span class="line">    printf(&quot;char\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line">void hello(int a) &#123;</span><br><span class="line">    printf(&quot;int\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    hello（NULL）;    //调用hello(int a)函数</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">如果在C++中还是用NULL来用作空指针的话，我们会以为hello(NULL)调用的是hello(char* a)，但实际上，因为NULL定义为0，所以调用的是hello(int a)。所以为了避免这种混淆，C++定义了nullptr关键字用作空指针。</span><br></pre></td></tr></table></figure>
+
+<h5 id="nullptr的使用"><a href="#nullptr的使用" class="headerlink" title="nullptr的使用"></a>nullptr的使用</h5><p>nullptr关键字用于标识空指针，是std::nullptr_t类型的（constexpr）变量。它可以转换成任何指针类型和bool布尔类型（主要是为了兼容普通指针可以作为条件判断语句的写法），但是不能被转换为整数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">char *p1 = nullptr;     // 正确</span><br><span class="line">int  *p2 = nullptr;     // 正确</span><br><span class="line">bool b = nullptr;       // 正确. if(b)判断为false</span><br><span class="line">int a = nullptr;        // 错误</span><br></pre></td></tr></table></figure>
+
+
+<p>注意nullptr和NULL以及0在作为条件判断时值都为false，它们两两之间进行等于（==）判断时值为true。</p>
+<h3 id="3-void-指针。"><a href="#3-void-指针。" class="headerlink" title="3.void*指针。"></a>3.void*指针。</h3><p>void* 是一种特殊的指针类型，可用于存放任意对象的地址。一个 void* 指针存放着一个地址，这一点和其他指针类似。</p>
+<p>在介绍 void 指针前，简单说一下 void 关键字使用规则：</p>
+<p>如果函数没有返回值，那么应声明为 void 类型；<br>如果函数无参数，那么应声明其参数为 void；（常省略）<br>如果函数的参数或返回值可以是任意类型指针，那么应声明其类型为 void* ；<br>void 的字面意思是“无类型”，void*则为“无类型指针”，void不能代表一个真实的变量，void体现了一种抽象。</p>
+<h4 id="（1）任何类型的指针都可以直接赋值给void指针，-且无需进行强制类型转换。"><a href="#（1）任何类型的指针都可以直接赋值给void指针，-且无需进行强制类型转换。" class="headerlink" title="（1）任何类型的指针都可以直接赋值给void指针， 且无需进行强制类型转换。"></a>（1）任何类型的指针都可以直接赋值给void指针， 且无需进行强制类型转换。</h4><p>任何类型指针都可以直接赋值给void指针。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">​```</span><br><span class="line">double obj = 3.14, *pd = &amp;obj;</span><br><span class="line">void* pv = &amp;obj;        // 正确，void* 能存放任意类型对象的地址</span><br><span class="line">                        // obj 可以是任意类型的对象</span><br><span class="line">pv = pd;   </span><br><span class="line">​```</span><br><span class="line"></span><br><span class="line">​             // 正确，pv 可以存放任意类型的指针</span><br></pre></td></tr></table></figure>
+
+<h4 id="（2）void指针并不能无需类型转换直接赋值给其他类型，如果要把-void-类型的指针赋值给其他类型的指针，需要进行显式转换。"><a href="#（2）void指针并不能无需类型转换直接赋值给其他类型，如果要把-void-类型的指针赋值给其他类型的指针，需要进行显式转换。" class="headerlink" title="（2）void指针并不能无需类型转换直接赋值给其他类型，如果要把 void 类型的指针赋值给其他类型的指针，需要进行显式转换。"></a>（2）void指针并不能无需类型转换直接赋值给其他类型，如果要把 void 类型的指针赋值给其他类型的指针，需要进行显式转换。</h4><p>（2）void指针并不能无需类型转换直接赋值给其他类型<br>如果要把 void 类型的指针赋值给其他类型的指针，需要进行显式转换。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">double obj = 3.14, *pd = &amp;obj;</span><br><span class="line">void *pv = &amp;obj;</span><br><span class="line">	</span><br><span class="line">double *pd1 = pv;               // 错误，不可以直接赋值</span><br><span class="line">double *pd2 = (double*)pv;      // 必须进行显示类型转换</span><br><span class="line">cout &lt;&lt; *pd2 &lt;&lt; endl;           // 3.14</span><br></pre></td></tr></table></figure>
+
+<h4 id="（3）void指针可以直接和其他类型的指针进行比较指针存放的地址值是否相同"><a href="#（3）void指针可以直接和其他类型的指针进行比较指针存放的地址值是否相同" class="headerlink" title="（3）void指针可以直接和其他类型的指针进行比较指针存放的地址值是否相同"></a>（3）void指针可以直接和其他类型的指针进行比较指针存放的地址值是否相同</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">double obj = 3.14, *pd = &amp;obj;</span><br><span class="line">void *pv = &amp;obj;</span><br><span class="line">	</span><br><span class="line">double *pd1 = pv;               // 错误，不可以直接赋值</span><br><span class="line">double *pd2 = (double*)pv;      // 必须进行显示类型转换</span><br><span class="line">cout &lt;&lt; *pd2 &lt;&lt; endl;           // 3.14</span><br><span class="line">cout &lt;&lt; (pv == pd2) &lt;&lt; endl;    // 1</span><br></pre></td></tr></table></figure>
+
+<h4 id="（4）void指针只有强制类型转换后才可以正常对其操作"><a href="#（4）void指针只有强制类型转换后才可以正常对其操作" class="headerlink" title="（4）void指针只有强制类型转换后才可以正常对其操作"></a>（4）void指针只有强制类型转换后才可以正常对其操作</h4><p>我们对该地址中到底是个什么类型的对象并不了解，因此不能直接操作 void* 指针所指的对象，也就无法确定能在这个对象上做哪些操作。</p>
+<p>概括来说，以 void* 的视角来看内存空间也就是仅仅是内存空间，没办法访问内存空间中所存的对象，因此只有对其进行恰当的类型转换之后才可以对其进行相应的访问。</p>
+<p>也就是说一个 void 指针必须要经过强制类型转换以后才有意义。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">double obj = 3.14, *pd = &amp;obj;</span><br><span class="line">void *pv = &amp;obj;</span><br><span class="line">	</span><br><span class="line">cout &lt;&lt; *(double*)pv &lt;&lt; endl;   // 3.14</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="（5）void指针变量和普通指针一样可以通过-NULL-或-nullptr-来初始化，表示一个空指针"><a href="#（5）void指针变量和普通指针一样可以通过-NULL-或-nullptr-来初始化，表示一个空指针" class="headerlink" title="（5）void指针变量和普通指针一样可以通过 NULL 或 nullptr 来初始化，表示一个空指针"></a>（5）void指针变量和普通指针一样可以通过 NULL 或 nullptr 来初始化，表示一个空指针</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void *pv = 0; </span><br><span class="line">void *pv2 = NULL;</span><br><span class="line">cout &lt;&lt; pv &lt;&lt; endl;         // 值为0x0</span><br><span class="line">cout &lt;&lt; pv2&lt;&lt; endl;         // 值为0x0</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="（6）当void指针作为函数的输入和输出时，表示可以接受任意类型的输入指针和输出任意类型的指针"><a href="#（6）当void指针作为函数的输入和输出时，表示可以接受任意类型的输入指针和输出任意类型的指针" class="headerlink" title="（6）当void指针作为函数的输入和输出时，表示可以接受任意类型的输入指针和输出任意类型的指针"></a>（6）当void指针作为函数的输入和输出时，表示可以接受任意类型的输入指针和输出任意类型的指针</h4><p>如果函数的参数或返回值可以是任意类型指针，那么应声明其类型为void*。在函数调用过程中的使用 void 指针作为输入输出参数也非常好用，可以灵活使用任意类型的指针，避免只能使用固定类型的指针。</p>
+<h3 id="4-const关键字的作用。"><a href="#4-const关键字的作用。" class="headerlink" title="4.const关键字的作用。"></a>4.const关键字的作用。</h3><h4 id="一-作用如下表所示："><a href="#一-作用如下表所示：" class="headerlink" title="一. 作用如下表所示："></a>一. 作用如下表所示：</h4><table>
+<thead>
+<tr>
+<th><em>No.</em></th>
+<th>作用</th>
+<th><em>说明</em></th>
+<th><em>参考代码</em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>可以定义const常量</td>
+<td></td>
+<td>const int Max = 100;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>便于进行类型检查</td>
+<td>const常量有数据类型，而宏常量没有数据类型。编译器可以对前者进行类型安全检查，而对后者只进行字符替换，没有类型安全检查，并且在字符替换时可能会产生意料不到的错误</td>
+<td>void f(const int i) { ………}    //对传入的参数进行类型检查，不匹配进行提示</td>
+</tr>
+<tr>
+<td>3</td>
+<td>可以保护被修饰的东西</td>
+<td>防止意外的修改，增强程序的健壮性。</td>
+<td>void f(const int i) { i=10;//error! }    //如果在函数体内修改了i，编译器就会报错</td>
+</tr>
+<tr>
+<td>4</td>
+<td>可以很方便地进行参数的调整和修改</td>
+<td>同宏定义一样，可以做到不变则已，一变都变</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>为函数重载提供了一个参考</td>
+<td></td>
+<td>class A {       ……  void f(int i)    {……} //一个函数  void f(int i) const {……} //上一个函数的重载       …… };</td>
+</tr>
+<tr>
+<td>6</td>
+<td>可以节省空间，避免不必要的内存分配</td>
+<td>const定义常量从汇编的角度来看，只是给出了对应的内存地址，而不是象#define一样给出的是立即数，所以，const定义的常量在程序运行过程中只有一份拷贝，而#define定义的常量在内存中有若干个拷贝</td>
+<td>#define PI 3.14159     //常量宏 const doulbe Pi=3.14159; //此时并未将Pi放入ROM中        …… double i=Pi;  //此时为Pi分配内存，以后不再分配！ double I=PI; //编译期间进行宏替换，分配内存 double j=Pi; //没有内存分配 double J=PI; //再进行宏替换，又一次分配内存！</td>
+</tr>
+<tr>
+<td>7</td>
+<td>提高了效率</td>
+<td>编译器通常不为普通const常量分配存储空间，而是将它们保存在符号表中，这使得它成为一个编译期间的常量，没有了存储与读内存的操作，使得它的效率也很高</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="二、Const的使用"><a href="#二、Const的使用" class="headerlink" title="二、Const的使用"></a>二、Const的使用</h4><h5 id="1、定义常量"><a href="#1、定义常量" class="headerlink" title="1、定义常量"></a>1、定义常量</h5><p>(1)const修饰变量，以下两种定义形式在本质上是一样的。它的含义是：const修饰的类型为TYPE的变量value是不可变的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TYPE const ValueName = value; </span><br><span class="line">  const TYPE ValueName = value;</span><br></pre></td></tr></table></figure>
+
+
+<p>(2)将const改为外部连接,作用于扩大至全局,编译时会分配内存,并且可以不进行初始化,仅仅作为声明,编译器认为在程序其他地方进行了定义.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extend const int ValueName = value;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2、指针使用COST"><a href="#2、指针使用COST" class="headerlink" title="2、指针使用COST"></a>2、指针使用COST</h5><p>(1)指针本身是常量不可变</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(char*) const pContent; </span><br><span class="line">const (char*) pContent; </span><br></pre></td></tr></table></figure>
+
+<p>(2)指针所指向的内容是常量不可变</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const (char) *pContent; </span><br><span class="line"> (char) const *pContent; </span><br></pre></td></tr></table></figure>
+
+<p>(3)两者都不可变</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const char* const pContent; </span><br></pre></td></tr></table></figure>
+
+<p>(4)还有其中区别方法，沿着<em>号划一条线：<br>如果const位于</em>的左侧，则const就是用来修饰指针所指向的变量，即指针指向为常量；<br>如果const位于*的右侧，const就是修饰指针本身，即指针本身是常量。</p>
+<h5 id="3、函数中使用CONST"><a href="#3、函数中使用CONST" class="headerlink" title="3、函数中使用CONST"></a>3、函数中使用CONST</h5><p>(1)const修饰函数参数<br>a.传递过来的参数在函数内不可以改变(无意义，因为Var本身就是形参)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void function(const int Var);</span><br></pre></td></tr></table></figure>
+
+<p>b.参数指针所指内容为常量不可变</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void function(const char* Var);</span><br></pre></td></tr></table></figure>
+
+<p>c.参数指针本身为常量不可变(也无意义，因为char* Var也是形参)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void function(char* const Var);</span><br></pre></td></tr></table></figure>
+
+<p>d.参数为引用，为了增加效率同时防止修改。修饰引用参数时：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void function(const Class&amp; Var); //引用参数在函数内不可以改变</span><br><span class="line"></span><br><span class="line">void function(const TYPE&amp; Var); //引用参数在函数内为常量不可变</span><br></pre></td></tr></table></figure>
+
+<p>这样的一个const引用传递和最普通的函数按值传递的效果是一模一样的,他禁止对引用的对象的一切修改,唯一不同的是按值传递会先建立一个类对象的副本, 然后传递过去,而它直接传递地址,所以这种传递比按值传递更有效.另外只有引用的const传递可以传递一个临时对象,因为临时对象都是const属性, 且是不可见的,他短时间存在一个局部域中,所以不能使用指针,只有引用的const传递能够捕捉到这个家伙.</p>
+<p>(2)const 修饰函数返回值<br>  const修饰函数返回值其实用的并不是很多，它的含义和const修饰普通变量以及指针的含义基本相同。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a.const int fun1() //这个其实无意义，因为参数返回本身就是赋值。</span><br><span class="line">b. const int * fun2() //调用时 const int *pValue = fun2(); </span><br><span class="line">           //我们可以把fun2()看作成一个变量，即指针内容不可变。</span><br><span class="line">c.int* const fun3()  //调用时 int * const pValue = fun2(); </span><br><span class="line">           //我们可以把fun2()看作成一个变量，即指针本身不可变</span><br></pre></td></tr></table></figure>
+
+
+<p>。</p>
+<p>一般情况下，函数的返回值为某个对象时，如果将其声明为const时，多用于操作符的重载。通常，不建议用const修饰函数的返回值类型为某个对象或对某个对象引用的情况。原因如下：如果返回值为某个对象为const（const A test = A 实例）或某个对象的引用为const（const A&amp; test = A实例） ，则返回值具有const属性，则返回实例只能访问类A中的公有（保护）数据成员和const成员函数，并且不允许对其进行赋值操作，这在一般情况下很少用到。</p>
+<h5 id="4、类相关CONST"><a href="#4、类相关CONST" class="headerlink" title="4、类相关CONST"></a>4、类相关CONST</h5><p>(1)const修饰成员变量<br>const修饰类的成员函数，表示成员常量，不能被修改，同时它只能在初始化列表中赋值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class A</span><br><span class="line">&#123; </span><br><span class="line">  …</span><br><span class="line">  const int nValue;     //成员常量不能被修改</span><br><span class="line">  …</span><br><span class="line">  A(int x): nValue(x) &#123; &#125; ; //只能在初始化列表中赋值</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+
+<p>(2)const修饰成员函数<br>const修饰类的成员函数，则该成员函数不能修改类中任何非const成员函数。一般写在函数的最后来修饰。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  class A</span><br><span class="line">  &#123; </span><br><span class="line">    …</span><br><span class="line">    void function()const; //常成员函数, 它不改变对象的成员变量.            </span><br><span class="line"></span><br><span class="line">//也不能调用类中任何非const成员函数。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于const类对象/指针/引用，只能调用类的const成员函数，因此，const修饰成员函数的最重要作用就是限制对于const对象的使用。</p>
+<p>a. const成员函数不被允许修改它所在对象的任何一个数据成员。</p>
+<p>b. const成员函数能够访问对象的const成员，而其他成员函数不可以。</p>
+<p>(3)const修饰类对象/对象指针/对象引用</p>
+<p>·       const修饰类对象表示该对象为常量对象，其中的任何成员都不能被修改。对于对象指针和对象引用也是一样。</p>
+<p>·       const修饰的对象，该对象的任何非const成员函数都不能被调用，因为任何非const成员函数会有修改成员变量的企图。<br>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class AAA</span><br><span class="line">&#123; </span><br><span class="line">  void func1(); </span><br><span class="line">void func2() const; </span><br><span class="line">&#125; </span><br><span class="line">const AAA aObj; </span><br><span class="line">aObj.func1(); ×</span><br><span class="line">aObj.func2(); 正确</span><br><span class="line"></span><br><span class="line">const AAA* aObj = new AAA(); </span><br><span class="line">aObj-&gt; func1(); ×</span><br><span class="line">aObj-&gt; func2(); 正确</span><br></pre></td></tr></table></figure>
+
+<h4 id="三、将Const类型转化为非Const类型的方法"><a href="#三、将Const类型转化为非Const类型的方法" class="headerlink" title="三、将Const类型转化为非Const类型的方法"></a>三、将Const类型转化为非Const类型的方法</h4><p>采用const_cast 进行转换。<br>用法：const_cast <type_id> (expression)<br>该运算符用来修改类型的const或volatile属性。除了const 或volatile修饰之外， type_id和expression的类型是一样的。</p>
+<ul>
+<li>  常量指针被转化成非常量指针，并且仍然指向原来的对象；</li>
+<li>  常量引用被转换成非常量引用，并且仍然指向原来的对象；</li>
+<li>常量对象被转换成非常量对象。</li>
+</ul>
+<h5 id="四、使用const的一些建议"><a href="#四、使用const的一些建议" class="headerlink" title="四、使用const的一些建议"></a>四、使用const的一些建议</h5><ul>
+<li>要大胆的使用const，这将给你带来无尽的益处，但前提是你必须搞清楚原委；</li>
+<li>要避免最一般的赋值操作错误，如将const变量赋值，具体可见思考题；</li>
+<li>在参数中使用const应该使用引用或指针，而不是一般的对象实例，原因同上；</li>
+<li> const在成员函数中的三种用法（参数、返回值、函数）要很好的使用；</li>
+<li>不要轻易的将函数的返回值类型定为const;</li>
+<li>除了重载操作符外一般不要将返回值类型定为对某个对象的const引用;</li>
+<li>任何不会修改数据成员的函数都应该声明为const 类型。</li>
+</ul>
+<h5 id="五、补充重要说明"><a href="#五、补充重要说明" class="headerlink" title="五、补充重要说明"></a>五、补充重要说明</h5><ul>
+<li><p> 类内部的常量限制：使用这种类内部的初始化语法的时候，常量必须是被一个常量表达式初始化的整型或枚举类型，而且必须是static和const形式。</p>
+</li>
+<li><p>如何初始化类内部的常量：一种方法就是static 和 const 并用，在外部初始化，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class A </span><br><span class="line">&#123; </span><br><span class="line">  public: A() &#123;&#125; </span><br><span class="line"></span><br><span class="line">  private: static const int i;//注意必须是静态的！</span><br><span class="line">&#125;；</span><br><span class="line"></span><br><span class="line">  const int A::i=3;</span><br></pre></td></tr></table></figure>
+
+<p>另一个很常见的方法就是初始化列表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class A </span><br><span class="line">&#123; </span><br><span class="line"> public: A(int i=0):test(i) &#123;&#125; </span><br><span class="line"> private: const int i; </span><br><span class="line">&#125;；</span><br></pre></td></tr></table></figure>
+
+<p> 还有一种方式就是在外部初始化，</p>
+</li>
+<li><p> 如果在非const成员函数中，this指针只是一个类类型的；如果在const成员函数中，this指针是一个const类类型的；如果在volatile成员函数中,this指针就是一个volatile类类型的。</p>
+</li>
+<li><p> new返回的指针必须是const类型的。。</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>zerobot
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://www.zerobot.top/2021/10/23/C++%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/c-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-1/" title="c++常见问题---1">https://www.zerobot.top/2021/10/23/C++的一些事/c-常见问题-1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/07/%E7%94%9F%E6%B4%BB/%E6%88%91%E8%BF%98%E6%B4%BB%E7%9D%80/" rel="prev" title="我还活着">
+                  <i class="fa fa-chevron-left"></i> 我还活着
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/10/30/C++%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/c-%E6%9C%89%E5%85%B3string%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/" rel="next" title="c++---有关string用法总结">
+                  c++---有关string用法总结 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">湘ICP备2021010091号 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zerobot</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
