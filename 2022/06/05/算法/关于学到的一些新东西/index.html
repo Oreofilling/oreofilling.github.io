@@ -21,28 +21,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.zerobot.top","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="题目链接:https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;subarray-product-less-than-k&#x2F;这道题其实自己开始能想到用双指针来做, 但是自己用一个窗口来维护乘积小于k,但是在计算满足条件的个数走了弯路,自己是在刚好不满足小于k的时候来计算cnt的,这时候要考虑是否有多计算的情况,其实在窗口移动的过程中,已经可以计算了.">
+    <meta name="description" content="刚刚结束了这次的周赛，最后一题还是没有写出来，但是学到了关于字符串的一些新知识： 这是原题：https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;design-a-text-editor&#x2F; 现在大概知道怎么做了，通过两个双端队列模拟即可，根本不需要维护光标的位置，这样思考量大大减少了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="有关滑动窗口">
-<meta property="og:url" content="https://www.zerobot.top/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E6%9C%89%E5%85%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/index.html">
+<meta property="og:title" content="关于学到的一些新东西">
+<meta property="og:url" content="https://www.zerobot.top/2022/06/05/%E7%AE%97%E6%B3%95/%E5%85%B3%E4%BA%8E%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B0%E4%B8%9C%E8%A5%BF/index.html">
 <meta property="og:site_name" content="ZEROBOT">
-<meta property="og:description" content="题目链接:https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;subarray-product-less-than-k&#x2F;这道题其实自己开始能想到用双指针来做, 但是自己用一个窗口来维护乘积小于k,但是在计算满足条件的个数走了弯路,自己是在刚好不满足小于k的时候来计算cnt的,这时候要考虑是否有多计算的情况,其实在窗口移动的过程中,已经可以计算了.">
+<meta property="og:description" content="刚刚结束了这次的周赛，最后一题还是没有写出来，但是学到了关于字符串的一些新知识： 这是原题：https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;design-a-text-editor&#x2F; 现在大概知道怎么做了，通过两个双端队列模拟即可，根本不需要维护光标的位置，这样思考量大大减少了。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-05-09T15:54:40.000Z">
-<meta property="article:modified_time" content="2022-06-02T15:10:12.000Z">
+<meta property="article:published_time" content="2022-06-05T06:50:47.000Z">
+<meta property="article:modified_time" content="2022-06-05T07:15:15.975Z">
 <meta property="article:author" content="zerobot">
-<meta property="article:tag" content="刷题日常">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://www.zerobot.top/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E6%9C%89%E5%85%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+<link rel="canonical" href="https://www.zerobot.top/2022/06/05/%E7%AE%97%E6%B3%95/%E5%85%B3%E4%BA%8E%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B0%E4%B8%9C%E8%A5%BF/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.zerobot.top/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E6%9C%89%E5%85%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/","path":"2022/05/09/刷题日常/有关滑动窗口/","title":"有关滑动窗口"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.zerobot.top/2022/06/05/%E7%AE%97%E6%B3%95/%E5%85%B3%E4%BA%8E%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B0%E4%B8%9C%E8%A5%BF/","path":"2022/06/05/算法/关于学到的一些新东西/","title":"关于学到的一些新东西"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>有关滑动窗口 | ZEROBOT</title>
+<title>关于学到的一些新东西 | ZEROBOT</title>
   
 
 
@@ -104,7 +104,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -117,7 +117,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E9%93%BE%E6%8E%A5-https-leetcode-cn-com-problems-subarray-product-less-than-k"><span class="nav-number">1.</span> <span class="nav-text">题目链接:https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;subarray-product-less-than-k&#x2F;</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -192,7 +191,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E6%9C%89%E5%85%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+    <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2022/06/05/%E7%AE%97%E6%B3%95/%E5%85%B3%E4%BA%8E%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B0%E4%B8%9C%E8%A5%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/qiaoba.jpg">
@@ -205,12 +204,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="有关滑动窗口 | ZEROBOT">
+      <meta itemprop="name" content="关于学到的一些新东西 | ZEROBOT">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          有关滑动窗口
+          关于学到的一些新东西
         </h1>
 
         <div class="post-meta-container">
@@ -220,15 +219,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2022-05-09 23:54:40" itemprop="dateCreated datePublished" datetime="2022-05-09T23:54:40+08:00">2022-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-02 23:10:12" itemprop="dateModified" datetime="2022-06-02T23:10:12+08:00">2022-06-02</time>
+      <time title="Created: 2022-06-05 14:50:47 / Modified: 15:15:15" itemprop="dateCreated datePublished" datetime="2022-06-05T14:50:47+08:00">2022-06-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -236,7 +229,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">刷题日常</span></a>
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
         </span>
     </span>
 
@@ -257,18 +250,35 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="题目链接-https-leetcode-cn-com-problems-subarray-product-less-than-k"><a href="#题目链接-https-leetcode-cn-com-problems-subarray-product-less-than-k" class="headerlink" title="题目链接:https://leetcode-cn.com/problems/subarray-product-less-than-k/"></a>题目链接:<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subarray-product-less-than-k/">https://leetcode-cn.com/problems/subarray-product-less-than-k/</a></h3><p>这道题其实自己开始能想到用双指针来做,</p>
-<p>但是自己用一个窗口来维护乘积小于k,但是在计算满足条件的个数走了弯路,自己是在刚好不满足小于k的时候来计算cnt的,这时候要考虑是否有多计算的情况,其实在窗口移动的过程中,已经可以计算了.</p>
+        <p>刚刚结束了这次的周赛，最后一题还是没有写出来，但是学到了关于字符串的一些新知识：</p>
+<p>这是原题：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-a-text-editor/">https://leetcode.cn/problems/design-a-text-editor/</a></p>
+<p>现在大概知道怎么做了，通过两个双端队列模拟即可，根本不需要维护光标的位置，这样思考量大大减少了。</p>
 <span id="more"></span>
 
+<p>1.c++的string也有insert和erase函数，用法和vector等容器一样，这个我以前居然不知道…</p>
+<p>2.还有一种做法就是利用双向链表模拟，这个我就是这样做的，但是debug把自己绕糊涂了，自己对这个数据结构感觉还是比较生疏，但是学到了几个比较有用的api：next()和prev()还有advance(),    这些都是对迭代器操作的一些函数，具体用法为</p>
+<p>advance()的函数原型</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt; <span class="keyword">class</span> <span class="title class_">InputIt</span>, <span class="keyword">class</span> <span class="title class_">Distance</span> &gt;<span class="function"><span class="type">void</span> <span class="title">advance</span><span class="params">( InputIt&amp; it, Distance n )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt; <span class="keyword">class</span> <span class="title class_">InputIt</span>, <span class="keyword">class</span> <span class="title class_">Distance</span> &gt;<span class="function"><span class="keyword">constexpr</span> <span class="type">void</span> <span class="title">advance</span><span class="params">( InputIt&amp; it, Distance n )</span></span>;</span><br></pre></td></tr></table></figure>
 
 
-<p>自己的代码:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numSubarrayProductLessThanK</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">		<span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> l=<span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> r=<span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> lastr=<span class="number">-1</span>;</span><br><span class="line">		<span class="type">int</span> sum=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(k==<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(r&lt;nums.<span class="built_in">size</span>())</span><br><span class="line">		&#123;</span><br><span class="line">			sum*=nums[r];</span><br><span class="line">			<span class="keyword">if</span>(sum&lt;k)</span><br><span class="line">			&#123;</span><br><span class="line">				r++;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(r&gt;l)</span><br><span class="line">				cnt+=(r-l)*(r-l+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">				<span class="keyword">if</span> (lastr&gt;=l)</span><br><span class="line">				cnt-=(lastr-l+<span class="number">2</span>)*(lastr-l+<span class="number">1</span>)/<span class="number">2</span>;	<span class="comment">//这里要减去重复的区间</span></span><br><span class="line">				lastr=r<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">while</span>(sum&gt;=k)<span class="comment">//这里要更新窗口左端点</span></span><br><span class="line">				&#123;</span><br><span class="line">					sum/=nums[l];</span><br><span class="line">					l++;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				r++;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(r&gt;l)</span><br><span class="line">		cnt+=(r-l)*(r-l+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span> (lastr&gt;=l)</span><br><span class="line">		cnt-=(lastr-l+<span class="number">2</span>)*(lastr-l+<span class="number">1</span>)/<span class="number">2</span>;	</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> cnt;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>advance()的含义：<br>表示将输入迭代器it移动n个单位的步长，其中n可为正数与负数。注意：这里的输入迭代器为双向迭代器，即迭代器即可右移，也可左移。<br>若移动n个单位的步长后，超出迭代器范围[begin,end)，则此行为未定义。</p>
+<p>advance()函数返回值：<br>函数返回值为void，也就是将传入的迭代器用引用的方式移动n个单位了。</p>
+<p>next()的函数原型：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt; <span class="keyword">class</span> <span class="title class_">ForwardIt</span> &gt;<span class="function">ForwardIt <span class="title">next</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	ForwardIt it, </span></span></span><br><span class="line"><span class="params"><span class="function">	<span class="keyword">typename</span> std::iterator_traits&lt;ForwardIt&gt;::difference_type n = <span class="number">1</span> )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt; <span class="keyword">class</span> <span class="title class_">InputIt</span> &gt;<span class="function"><span class="keyword">constexpr</span> InputIt <span class="title">next</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	InputIt it, </span></span></span><br><span class="line"><span class="params"><span class="function">	<span class="keyword">typename</span> std::iterator_traits&lt;InputIt&gt;::difference_type n = <span class="number">1</span> )</span></span>;	</span><br></pre></td></tr></table></figure>
 
-<p>官方题解:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int numSubarrayProductLessThanK(vector&lt;int&gt;&amp; nums, int k) &#123;</span><br><span class="line">        int n = nums.size(), ret = 0;</span><br><span class="line">        int prod = 1, i = 0;</span><br><span class="line">        for (int j = 0; j &lt; n; j++) &#123;</span><br><span class="line">            prod *= nums[j];</span><br><span class="line">            while (i &lt;= j &amp;&amp; prod &gt;= k) &#123;</span><br><span class="line">                prod /= nums[i];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            ret += j - i + 1;//这里要明白这个等式是怎么来的,相当于固定了右端点.求子集个数.</span><br><span class="line">        &#125;</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<p>next()的含义：<br>表示迭代器右移n个单位的步长，即迭代器+n。<br>若移动n个单位的步长后，超出迭代器范围[begin,end)，则此行为未定义。</p>
+<p>next()函数返回值：<br>函数的返回值为一个迭代器，也就是传入迭代器右移n个单位后，返回这个移动后的新迭代器，其中n=1，可以省略第二个参数。</p>
+<p>prev()的函数原型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">template&lt; class BidirIt &gt;BidirIt prev(</span><br><span class="line">  BidirIt it, </span><br><span class="line">  typename std::iterator_traits&lt;BidirIt&gt;::difference_type n = 1 );</span><br><span class="line"></span><br><span class="line">template&lt; class BidirIt &gt;constexpr BidirIt prev(</span><br><span class="line">  BidirIt it, </span><br><span class="line">  typename std::iterator_traits&lt;BidirIt&gt;::difference_type n = 1 );</span><br><span class="line">prev()的含义：</span><br><span class="line">表示迭代器左移n个单位，即迭代器-n。</span><br><span class="line">若移动n个单位的步长后，超出迭代器范围[begin,end)，则此行为未定义。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>prev()函数返回值：<br>函数的返回值为一个迭代器，也就是传入迭代器左移n个单位后，返回这个移动后的新迭代器，其中n=1，可以省略第二个参数。</p>
+<p>3.有关rope的学习</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;ext/rope&gt;</span><span class="comment">///头文件</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> __gnu_cxx;</span><br><span class="line">rope &lt;<span class="type">int</span>&gt; x;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    x.<span class="built_in">push_back</span>(x); <span class="comment">///在末尾加x</span></span><br><span class="line">    x.<span class="built_in">insert</span>(pos, x); <span class="comment">///在pos位置加入x</span></span><br><span class="line">    x.<span class="built_in">erase</span>(pos, x); <span class="comment">///从pos位置删除x个元素</span></span><br><span class="line">    x.<span class="built_in">copy</span>(pos, len, x); <span class="comment">///从pos开始len个元素用x代替</span></span><br><span class="line">    x.<span class="built_in">replace</span>(pos, x); <span class="comment">///从pos开始全部换为x</span></span><br><span class="line">    x.<span class="built_in">substr</span>(pos, x); <span class="comment">///提取pos开始x个元素</span></span><br><span class="line">    x.<span class="built_in">at</span>(x)/[x]; <span class="comment">///访问第x个元素</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在才知道c++ stl中有这么一个东西，它结合了数组和链表的优点，用于这个题非常合适，但是只适用于int和char数组。</p>
 
     </div>
 
@@ -286,7 +296,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://www.zerobot.top/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E6%9C%89%E5%85%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" title="有关滑动窗口">https://www.zerobot.top/2022/05/09/刷题日常/有关滑动窗口/</a>
+      <a href="https://www.zerobot.top/2022/06/05/%E7%AE%97%E6%B3%95/%E5%85%B3%E4%BA%8E%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B0%E4%B8%9C%E8%A5%BF/" title="关于学到的一些新东西">https://www.zerobot.top/2022/06/05/算法/关于学到的一些新东西/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -312,21 +322,18 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/" rel="tag"># 刷题日常</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/01/25/%E7%AE%97%E6%B3%95/%E5%9B%BE%E6%9C%89%E5%85%B3%E7%AE%97%E6%B3%95/" rel="prev" title="图有关算法">
-                  <i class="fa fa-chevron-left"></i> 图有关算法
+                <a href="/2022/05/15/%E6%80%BB%E7%BB%93/2022-5-15%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/" rel="prev" title="2022-5-15周赛总结">
+                  <i class="fa fa-chevron-left"></i> 2022-5-15周赛总结
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E6%9C%89%E5%85%B3%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E7%9A%84%E9%97%AE%E9%A2%98/" rel="next" title="有关括号匹配的问题">
-                  有关括号匹配的问题 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
