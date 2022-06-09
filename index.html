@@ -215,7 +215,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-06-09 22:08:42 / Modified: 22:49:45" itemprop="dateCreated datePublished" datetime="2022-06-09T22:08:42+08:00">2022-06-09</time>
+      <time title="Created: 2022-06-09 22:08:42 / Modified: 22:52:51" itemprop="dateCreated datePublished" datetime="2022-06-09T22:08:42+08:00">2022-06-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -237,8 +237,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​         我们都知道rand()函数可以生成随机数，但是最近发现它的一些缺陷，就是当需要在一个大数范围中生成一个随机数，可能达不到随机的效果，而且也不能在范围内生成浮点数。这是在c++标准库第二版看到的缺陷说明：</p>
-<p>1.但是当商是小整数时，许多C++系统环境的伪随机数生成器所产生的余数并不是绝对随机的。例如当n等于2时，rand()%n连续结果就将在0和1之间选择。<br>2.当n的值非常大是，那么RAND_MAX（rand()返回的最大值）不会被均匀地被n除尽，一些余数出现的频率将会比其他的大。</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​         我们都知道由于rand()返回的是伪随机数，可以用rand()%n生成[0,n)范围内的随机数，但是最近发现它的一些缺陷，就是当需要在一个大数范围中生成一个随机数，可能达不到随机的效果，而且也不能在范围内生成浮点数。这是在c++标准库第二版看到的缺陷说明：</p>
+<p>1.当商是小整数时，许多C++系统环境的伪随机数生成器所产生的余数并不是绝对随机的。例如当n等于2时，rand()%n连续结果就将在0和1之间选择。<br>2.当n的值非常大是，那么RAND_MAX（rand()返回的最大值）不会被均匀地被n除尽，一些余数出现的频率将会比其他的大。</p>
 <p>例如：假设RAND_MAX是32767（对于任何系统环境，RAND_MAX最小的允许值）且n是20000。这样rand（）将会有两个不同的值能令rand()%n等于10000（即10000和30000），但是rand()仅有一个值能让rand()%n等于15000(就是15000)。因此，简单实现产生10000将会是15000的两倍。</p>
           <!--noindex-->
             <div class="post-button">
