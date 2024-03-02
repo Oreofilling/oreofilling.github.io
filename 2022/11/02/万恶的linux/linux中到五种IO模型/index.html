@@ -21,23 +21,39 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.zerobot.top","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="ZEROBOT">
-<meta property="og:url" content="https://www.zerobot.top/index.html">
+    <meta name="description" content="IO模型的选择在Linux网络编程中十分重要，在Unix&#x2F;Linux环境中主要提供了五种不同的IO模型，分别是阻塞式IO、非阻塞式IO、IO多路复用、信号驱动式IO和异步IO。 通常一个输入操作包含两个不同阶段：  等待数据准备好 从内核向进程复制数据   例如，对于一个网络套接字上的输入操作，第一步通常涉及到发生系统调用，用户态切换到内核态并等待数据从网络中到达，当所有等待分组到达时，数据被复制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux中到五种IO模式">
+<meta property="og:url" content="https://www.zerobot.top/2022/11/02/%E4%B8%87%E6%81%B6%E7%9A%84linux/linux%E4%B8%AD%E5%88%B0%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="ZEROBOT">
+<meta property="og:description" content="IO模型的选择在Linux网络编程中十分重要，在Unix&#x2F;Linux环境中主要提供了五种不同的IO模型，分别是阻塞式IO、非阻塞式IO、IO多路复用、信号驱动式IO和异步IO。 通常一个输入操作包含两个不同阶段：  等待数据准备好 从内核向进程复制数据   例如，对于一个网络套接字上的输入操作，第一步通常涉及到发生系统调用，用户态切换到内核态并等待数据从网络中到达，当所有等待分组到达时，数据被复制">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-images.githubusercontent.com/87457873/127826956-daff612a-711e-4f92-bcb3-89000b17d6a2.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/87457873/127827045-ba456dab-4e96-4c38-a572-e6337824e476.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/87457873/127827107-819785fd-e73d-4a88-a018-80179575931f.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/87457873/127828345-ca062966-dfd9-4c80-86c0-539e723ddb7f.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/87457873/127828408-034ea5dc-b86f-4014-8291-10cc05d025f3.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/87457873/127828469-df0914b1-dff1-4f43-907a-225ac483bb03.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/87457873/127828664-517706d2-58b9-4a11-bea7-59b0a2d84234.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/87457873/127829018-be125f77-6a05-497b-ab7d-a7d3927a1e33.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/87457873/127829103-223bdb2c-b788-4ccb-841e-025f4ef73601.png">
+<meta property="article:published_time" content="2022-11-02T12:11:04.000Z">
+<meta property="article:modified_time" content="2024-03-02T12:17:44.514Z">
 <meta property="article:author" content="zerobot">
+<meta property="article:tag" content="linux网络">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/87457873/127826956-daff612a-711e-4f92-bcb3-89000b17d6a2.png">
 
 
-<link rel="canonical" href="https://www.zerobot.top/">
+<link rel="canonical" href="https://www.zerobot.top/2022/11/02/%E4%B8%87%E6%81%B6%E7%9A%84linux/linux%E4%B8%AD%E5%88%B0%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.zerobot.top/2022/11/02/%E4%B8%87%E6%81%B6%E7%9A%84linux/linux%E4%B8%AD%E5%88%B0%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/","path":"2022/11/02/万恶的linux/linux中到五种IO模型/","title":"linux中到五种IO模式"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>ZEROBOT</title>
+<title>linux中到五种IO模式 | ZEROBOT</title>
   
 
 
@@ -67,7 +83,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">ZEROBOT</h1>
+      <p class="site-title">ZEROBOT</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -99,7 +115,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -112,6 +128,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E%E5%BC%8FI-O%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">阻塞式I&#x2F;O模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E9%98%BB%E5%A1%9E%E5%BC%8FI-O%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">非阻塞式I&#x2F;O模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">I&#x2F;O多路复用模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#select"><span class="nav-number">3.1.</span> <span class="nav-text">select</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#poll"><span class="nav-number">3.2.</span> <span class="nav-text">poll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select-%E5%92%8Cpoll-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.3.</span> <span class="nav-text">select()和poll()的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select-%E5%92%8Cpoll-%E7%9A%84%E4%B8%8D%E8%B6%B3"><span class="nav-number">3.4.</span> <span class="nav-text">select()和poll()的不足</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll"><span class="nav-number">3.5.</span> <span class="nav-text">epoll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%88%E4%BB%A5%E7%BD%91%E7%BB%9Csocket%E7%9B%91%E5%90%AC%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="nav-number">3.6.</span> <span class="nav-text">epoll的实现原理（以网络socket监听为例）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">3.7.</span> <span class="nav-text">epoll设计的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="nav-number">3.8.</span> <span class="nav-text">epoll的实现细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">3.9.</span> <span class="nav-text">epoll的优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E9%A9%B1%E5%8A%A8%E5%BC%8FI-O%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">信号驱动式I&#x2F;O模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E9%A9%B1%E5%8A%A8%E5%BC%8FI-O%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">信号驱动式I&#x2F;O的应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E9%80%89%E6%8B%A9"><span class="nav-number">5.</span> <span class="nav-text">I&#x2F;O模型的技术选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E5%87%86%E5%A4%87%E5%B0%B1%E7%BB%AA%E7%9A%84%E9%80%9A%E7%9F%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text">文件描述符准备就绪的通知方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F%E5%AF%B9%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">6.1.</span> <span class="nav-text">触发方式对程序设计的影响</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5I-O%E6%A8%A1%E5%9E%8B"><span class="nav-number">7.</span> <span class="nav-text">异步I&#x2F;O模型</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -175,16 +192,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2022/11/02/%E4%B8%87%E6%81%B6%E7%9A%84linux/linux%E4%B8%AD%E5%88%B0%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -198,13 +216,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ZEROBOT">
+      <meta itemprop="name" content="linux中到五种IO模式 | ZEROBOT">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/02/%E4%B8%87%E6%81%B6%E7%9A%84linux/linux%E4%B8%AD%E5%88%B0%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">linux中到五种IO模式</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          linux中到五种IO模式
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -227,6 +245,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
 </div>
 
         </div>
@@ -236,7 +261,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>IO模型的选择在Linux网络编程中十分重要，在Unix/Linux环境中主要提供了五种不同的IO模型，分别是阻塞式IO、非阻塞式IO、IO多路复用、信号驱动式IO和异步IO。</p>
+        <p>IO模型的选择在Linux网络编程中十分重要，在Unix/Linux环境中主要提供了五种不同的IO模型，分别是阻塞式IO、非阻塞式IO、IO多路复用、信号驱动式IO和异步IO。</p>
 <p>通常一个输入操作包含两个不同阶段：</p>
 <ol>
 <li>等待数据准备好</li>
@@ -412,7 +437,6 @@
 <li>与信号驱动式I/O模型的区别<br>信号驱动式I/O是由内核告诉我们何时可以启动一个I/O操作，而异步I/O模型则是由内核通知我们I/O操作何时完成。</li>
 </ul>
 
-      
     </div>
 
     
@@ -420,348 +444,56 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>zerobot
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://www.zerobot.top/2022/11/02/%E4%B8%87%E6%81%B6%E7%9A%84linux/linux%E4%B8%AD%E5%88%B0%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/" title="linux中到五种IO模式">https://www.zerobot.top/2022/11/02/万恶的linux/linux中到五种IO模型/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
 </div>
 
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
 
+  <div class="social-list">
 
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2022/10/08/%E7%94%9F%E6%B4%BB/%E7%AA%81%E7%84%B6%E5%87%BA%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/qiaoba.jpg">
-      <meta itemprop="name" content="zerobot">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/08/%E7%94%9F%E6%B4%BB/%E7%AA%81%E7%84%B6%E5%87%BA%E7%8E%B0/" class="post-title-link" itemprop="url">突然出现</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-08 23:38:59" itemprop="dateCreated datePublished" datetime="2022-10-08T23:38:59+08:00">2022-10-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
-        </span>
-    </span>
-
-  
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+  </div>
 </div>
 
-        </div>
-      </header>
+          <div class="post-tags">
+              <a href="/tags/linux%E7%BD%91%E7%BB%9C/" rel="tag"># linux网络</a>
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>​       最近几个月一直没有更新，懒是主要因素，还有一个是工作上太忙了，留给自己思考的时间已经少的不能再少了。为什么突然现在想起来要写点什么，可能也是心血来潮。说说最近几个月自己干了些啥事吧。</p>
-<p>​       工作上，每天8点半下班可能已经是常态了。不知道什么时候养成了这个习惯（？），感觉已经彻底成为代码工具了，最近工作一直不顺心，之前有个自己负责的项目采用了nginx做正向代理，在实现了数据交互调试完成之后，看起来一切都接近尾声，开始进入测试阶段了。但是由于性能方面之前由于赶进度以及相信nginx的优秀代理能力，自己没有做太多的自测工作。但是自己最后还是不放心，又自测了一遍，发现https代理的性能已经远远低于预期。于是我的噩梦开始了，由于项目考虑到安全性必须使用https道路，我不得不被迫走向一条性能优化的道路，中途看了nginx源码，了解了openssl加密原理，甚至尝试使用了硬件指令来加速加密解密操作。通过在nginx代码中分别计算https不同阶段的耗时想找到使用https耗时的主要来源，最后想从优化ssl握手过程中的加密解密入手，但是最后效果甚微。第一次有一种心累的感觉，看着那晦涩难懂的内核代码，真的是欲哭无泪。后来我就在想，为什么一开始要用nginx来做正向代理呢，我们的目的不就是做一个proxy吗？又没有负载均衡的需求，为什么不直接通过转发来实现呢？不知道，很心累，目前自己的心态就是向内核组的大佬请求支援，反正按照自己的能力应该不能搞出来了，或许这个优化根本不可能实现，哼= =（针对单个客户端相当于毫秒级的优化了）。当然除了这个，还有一些其他工作，就不再详述了，无非就是一些协议的处理，和一些bug的处理。</p>
-<p>​       生活上，这里具体讲一下自己的刷题，自己刷题大概从一月份已经坚持到现在了，这里给自己一个赞！虽然工作很忙，但是晚上回家还是有点时间刷个一两题的，甚至还走火入魔开始打cf上面的一些比赛了，虽然每次都被暴打，但是感觉很爽（奇怪的描述…)，可以说，刷题成了我放松的一种方式（？），曾经是带有功利性的目的来刷题，现在感觉完全是热爱上了算法了。不过我还是有自知之明的，目前我的水平大概只能够应付中等水平的面试，一些比较高深的算法知识自己还未打算深入，主要是时间的问题。毕竟自己要平衡工作和刷题这两个方面,我的打算是把刷题当成一个长期爱好来做，所以每天有一点小进步我已经很开心了，长时间搞自己身体可能吃不消哈哈。</p>
-<p>​    我也不知道我以后会变成什么样子，但至少我现在是充实的，虽然有时候有一点点累（悲，加油啦！</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2022/06/10/C++%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/%E5%85%B3%E4%BA%8Ec-%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/qiaoba.jpg">
-      <meta itemprop="name" content="zerobot">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/10/C++%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/%E5%85%B3%E4%BA%8Ec-%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">关于c++随机数的一些函数</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-10 22:08:42" itemprop="dateCreated datePublished" datetime="2022-06-10T22:08:42+08:00">2022-06-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/c-%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/" itemprop="url" rel="index"><span itemprop="name">c++的一些事</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​         我们都知道由于rand()返回的是伪随机数，可以用rand()%n生成[0,n)范围内的随机数，但是最近发现它的一些缺陷，就是当需要在一个大数范围中生成一个随机数，可能达不到随机的效果，而且也不能在范围内生成浮点数。这是在c++标准库第二版看到的缺陷说明：</p>
-<p>1.当商是小整数时，许多C++系统环境的伪随机数生成器所产生的余数并不是绝对随机的。例如当n等于2时，rand()%n连续结果就将在0和1之间选择。<br>2.当n的值非常大是，那么RAND_MAX（rand()返回的最大值）不会被均匀地被n除尽，一些余数出现的频率将会比其他的大。</p>
-<p>例如：假设RAND_MAX是32767（对于任何系统环境，RAND_MAX最小的允许值）且n是20000。这样rand（）将会有两个不同的值能令rand()%n等于10000（即10000和30000），但是rand()仅有一个值能让rand()%n等于15000(就是15000)。因此，简单实现产生10000将会是15000的两倍。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/06/10/C++%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/%E5%85%B3%E4%BA%8Ec-%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2022/06/05/%E7%AE%97%E6%B3%95/%E5%85%B3%E4%BA%8E%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B0%E4%B8%9C%E8%A5%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/qiaoba.jpg">
-      <meta itemprop="name" content="zerobot">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/05/%E7%AE%97%E6%B3%95/%E5%85%B3%E4%BA%8E%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B0%E4%B8%9C%E8%A5%BF/" class="post-title-link" itemprop="url">关于学到的一些新东西</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-05 14:50:47" itemprop="dateCreated datePublished" datetime="2022-06-05T14:50:47+08:00">2022-06-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>刚刚结束了这次的周赛，最后一题还是没有写出来，但是学到了关于字符串的一些新知识：</p>
-<p>这是原题：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-a-text-editor/">https://leetcode.cn/problems/design-a-text-editor/</a></p>
-<p>现在大概知道怎么做了，通过两个双端队列模拟即可，根本不需要维护光标的位置，这样思考量大大减少了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/06/05/%E7%AE%97%E6%B3%95/%E5%85%B3%E4%BA%8E%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B0%E4%B8%9C%E8%A5%BF/#more" rel="contents">
-                Read more &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/08/%E7%94%9F%E6%B4%BB/%E7%AA%81%E7%84%B6%E5%87%BA%E7%8E%B0/" rel="prev" title="突然出现">
+                  <i class="fa fa-chevron-left"></i> 突然出现
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2022/05/15/%E6%80%BB%E7%BB%93/2022-5-15%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/qiaoba.jpg">
-      <meta itemprop="name" content="zerobot">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/15/%E6%80%BB%E7%BB%93/2022-5-15%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">2022-5-15周赛总结</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-15 14:04:18" itemprop="dateCreated datePublished" datetime="2022-05-15T14:04:18+08:00">2022-05-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">总结</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>​          这次周赛和双周赛真的是惨不忍睹,真切地感受到自己与别人之间的差距,状态是一方面,感觉自己的思路真的是太局限了,看题解会做但是为什么比赛的时候想不到呢?我觉得有以下原因:</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/05/15/%E6%80%BB%E7%BB%93/2022-5-15%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/#more" rel="contents">
-                Read more &raquo;
-              </a>
+            <div class="post-nav-item">
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          </div>
     </footer>
   </article>
 </div>
@@ -769,437 +501,7 @@
 
 
 
-    
 
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E5%88%B7%E5%88%B0%E7%9A%84dp%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/qiaoba.jpg">
-      <meta itemprop="name" content="zerobot">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E5%88%B7%E5%88%B0%E7%9A%84dp%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">刷到的dp问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-09 23:59:58" itemprop="dateCreated datePublished" datetime="2022-05-09T23:59:58+08:00">2022-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">刷题日常</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>今天刷了几道dp问题,记一下.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E5%88%B7%E5%88%B0%E7%9A%84dp%E9%97%AE%E9%A2%98/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E6%9C%89%E5%85%B3%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E7%9A%84%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/qiaoba.jpg">
-      <meta itemprop="name" content="zerobot">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E6%9C%89%E5%85%B3%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">有关括号匹配的问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-09 23:56:24" itemprop="dateCreated datePublished" datetime="2022-05-09T23:56:24+08:00">2022-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">刷题日常</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>虽然自己一看到括号匹配的问题就想到了栈处理,但是实际上还需要想到动态规划这一思想,别把思维局限在里面了.</p>
-<p>判断一个括号序列是否合法是经典问题。对于一个括号序列，我们从左向右遍历每个字符，同时维护变量 now（初值为 0）。遇到左括号时，now += 1，遇到右括号时，now -= 1。如果过程中 now 始终非负，且最后 now 变成 0 则序列合法</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E6%9C%89%E5%85%B3%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E7%9A%84%E9%97%AE%E9%A2%98/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E6%9C%89%E5%85%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/qiaoba.jpg">
-      <meta itemprop="name" content="zerobot">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E6%9C%89%E5%85%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" class="post-title-link" itemprop="url">有关滑动窗口</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-09 23:54:40" itemprop="dateCreated datePublished" datetime="2022-05-09T23:54:40+08:00">2022-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">刷题日常</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="题目链接-https-leetcode-cn-com-problems-subarray-product-less-than-k"><a href="#题目链接-https-leetcode-cn-com-problems-subarray-product-less-than-k" class="headerlink" title="题目链接:https://leetcode-cn.com/problems/subarray-product-less-than-k/"></a>题目链接:<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subarray-product-less-than-k/">https://leetcode-cn.com/problems/subarray-product-less-than-k/</a></h3><p>这道题其实自己开始能想到用双指针来做,</p>
-<p>但是自己用一个窗口来维护乘积小于k,但是在计算满足条件的个数走了弯路,自己是在刚好不满足小于k的时候来计算cnt的,这时候要考虑是否有多计算的情况,其实在窗口移动的过程中,已经可以计算了.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/05/09/%E5%88%B7%E9%A2%98%E6%97%A5%E5%B8%B8/%E6%9C%89%E5%85%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2022/01/25/%E7%AE%97%E6%B3%95/%E5%9B%BE%E6%9C%89%E5%85%B3%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/qiaoba.jpg">
-      <meta itemprop="name" content="zerobot">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/25/%E7%AE%97%E6%B3%95/%E5%9B%BE%E6%9C%89%E5%85%B3%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">图有关算法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-01-25 22:00:15" itemprop="dateCreated datePublished" datetime="2022-01-25T22:00:15+08:00">2022-01-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这里搬运acwing的模板，感觉还不错~</p>
-<p>树与图的存储<br>树是一种特殊的图，与图的存储方式相同。<br>对于无向图中的边ab，存储两条有向边a-&gt;b, b-&gt;a。<br>因此我们可以只考虑有向图的存储。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/25/%E7%AE%97%E6%B3%95/%E5%9B%BE%E6%9C%89%E5%85%B3%E7%AE%97%E6%B3%95/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zerobot.top/2022/01/23/C++%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/c-STL%E7%9A%84%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/qiaoba.jpg">
-      <meta itemprop="name" content="zerobot">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ZEROBOT">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/23/C++%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/c-STL%E7%9A%84%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="post-title-link" itemprop="url">c++STL的二分查找</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-01-23 23:31:16" itemprop="dateCreated datePublished" datetime="2022-01-23T23:31:16+08:00">2022-01-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/c-%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/" itemprop="url" rel="index"><span itemprop="name">c++的一些事</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="C-STL中的Binary-search（二分查找）"><a href="#C-STL中的Binary-search（二分查找）" class="headerlink" title="C++ STL中的Binary search（二分查找）"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wkfvawl/p/9475939.html">C++ STL中的Binary search（二分查找）</a></h1><h2 id="一-解释"><a href="#一-解释" class="headerlink" title="一.解释"></a><strong>一.解释</strong></h2><p>　　以前遇到二分的题目都是手动实现二分，不得不说错误比较多，关于返回值，关于区间的左闭右开等很容易出错，最近做题发现直接使用STL中的二分函数方便快捷还不会出错，不过对于没有接触过的同学，二分函数确实是一个头疼的部分，自己查的内容又有点乱，找不到具体的使用方法，有必要自己总结一份完整的以后备用。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/23/C++%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/c-STL%E7%9A%84%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
 
 </div>
   </main>
