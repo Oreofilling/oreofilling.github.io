@@ -35,9 +35,9 @@ export const siteConfig: SiteConfig = {
 			// Get these values from https://giscus.app
 			// Go to the site, enter your repo, and copy the generated values
 			repo: "Oreofilling/oreofilling.github.io",
-			repoId: "",       // TODO: Fill in from giscus.app
+			repoId: "R_kgDOOnRcsA",
 			category: "Comments",
-			categoryId: "",   // TODO: Fill in from giscus.app
+			categoryId: "DIC_kwDOOnRcsM4C8xeU",
 			mapping: "pathname",
 			strict: "0",
 			reactionsEnabled: "1",
