@@ -36,6 +36,7 @@ export type SiteConfig = {
 	};
 
 	favicon: Favicon[];
+	comment?: CommentConfig;
 };
 
 export type Favicon = {
@@ -95,6 +96,25 @@ export type BlogPostData = {
 	prevSlug?: string;
 	nextTitle?: string;
 	nextSlug?: string;
+};
+
+export type GiscusConfig = {
+	repo: string;
+	repoId: string;
+	category: string;
+	categoryId: string;
+	mapping?: "pathname" | "url" | "title" | "og:title" | "number" | "specific";
+	strict?: "0" | "1";
+	reactionsEnabled?: "0" | "1";
+	emitMetadata?: "0" | "1";
+	inputPosition?: "top" | "bottom";
+	theme?: "light" | "dark" | "preferred_color_scheme" | string;
+	lang?: string;
+	loading?: "lazy" | "eager";
+};
+
+export type CommentConfig = {
+	giscus?: GiscusConfig;
 };
 
 export type ExpressiveCodeConfig = {

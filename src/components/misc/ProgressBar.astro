@@ -1,0 +1,38 @@
+---
+// This component adds a scroll progress bar at the top of the page
+---
+
+<div id="progress-bar" class="progress-bar"></div>
+
+<script is:inline>
+(function() {
+  const bar = document.getElementById('progress-bar');
+  if (!bar) return;
+
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
+  document.addEventListener('astro:after-swap', updateProgress);
+  updateProgress();
+})();
+</script>
+
+<style>
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--primary);
+  z-index: 9999;
+  transition: width 0.1s linear;
+  opacity: 0.9;
+}
+</style>

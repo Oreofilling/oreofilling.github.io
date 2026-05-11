@@ -16,11 +16,11 @@ export const siteConfig: SiteConfig = {
 		fixed: false,
 	},
 	banner: {
-		enable: false,
-		src: "assets/images/demo-banner.png",
+		enable: true,
+		src: "assets/images/banner.jpg",
 		position: "center",
 		credit: {
-			enable: false,
+			enable: true,
 			text: "",
 			url: "",
 		},
@@ -30,6 +30,24 @@ export const siteConfig: SiteConfig = {
 		depth: 3,
 	},
 	favicon: [],
+	comment: {
+		giscus: {
+			// Get these values from https://giscus.app
+			// Go to the site, enter your repo, and copy the generated values
+			repo: "Oreofilling/oreofilling.github.io",
+			repoId: "",       // TODO: Fill in from giscus.app
+			category: "Comments",
+			categoryId: "",   // TODO: Fill in from giscus.app
+			mapping: "pathname",
+			strict: "0",
+			reactionsEnabled: "1",
+			emitMetadata: "0",
+			inputPosition: "top",
+			theme: "preferred_color_scheme",
+			lang: "zh-CN",
+			loading: "lazy",
+		},
+	},
 };
 
 export const navBarConfig: NavBarConfig = {
