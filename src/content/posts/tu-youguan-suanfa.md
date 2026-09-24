@@ -4,6 +4,8 @@ published: 2022-01-25
 tags: ["算法"]
 category: "算法"
 draft: false
+description: "图论相关算法整理:遍历、最短路等常用算法与实现。"
+image: "assets/images/covers/algo.jpg"
 ---
 
 这里搬运acwing的模板，感觉还不错~

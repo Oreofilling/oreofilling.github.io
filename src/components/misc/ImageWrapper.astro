@@ -35,13 +35,19 @@ if (isLocal) {
 	let normalizedPath = path
 		.normalize(path.join("../../", basePath, src))
 		.replace(/\\/g, "/");
-	const file = files[normalizedPath];
+	let file = files[normalizedPath];
+	if (!file) {
+		// 允许相对 src 根目录的路径,如 "assets/images/covers/x.jpg"
+		const rootPath = path.normalize(path.join("../../", src)).replace(/\\/g, "/");
+		file = files[rootPath];
+		normalizedPath = rootPath;
+	}
 	if (!file) {
 		console.error(
 			`\n[ERROR] Image file not found: ${normalizedPath.replace("../../", "src/")}`,
 		);
 	}
-	img = await file();
+	img = file ? await file() : undefined;
 }
 
 const imageClass = "w-full h-full object-cover";

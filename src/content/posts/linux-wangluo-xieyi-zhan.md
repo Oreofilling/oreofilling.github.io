@@ -4,6 +4,8 @@ published: 2021-06-28
 tags: ["Linux"]
 category: "Linux网络"
 draft: false
+description: "Linux 网络协议栈的入门梳理,从分层模型说起。"
+image: "assets/images/covers/linux.jpg"
 ---
 
 ### 先说点废话

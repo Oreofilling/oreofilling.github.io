@@ -4,6 +4,8 @@ published: 2021-09-06
 tags: ["随笔"]
 category: "生活"
 draft: false
+description: "冒个泡,证明博客还活着。"
+image: "assets/images/covers/life.jpg"
 ---
 
 #### emmm

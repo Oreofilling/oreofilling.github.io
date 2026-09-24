@@ -4,6 +4,8 @@ published: 2022-01-23
 tags: ["C++"]
 category: "C++的一些事"
 draft: false
+description: "总结 STL 中的二分查找函数:lower_bound、upper_bound 与 binary_search 的用法和边界问题。"
+image: "assets/images/covers/cpp.jpg"
 ---
 
 # C++ STL中的Binary search（二分查找）

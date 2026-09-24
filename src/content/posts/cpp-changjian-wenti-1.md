@@ -4,6 +4,8 @@ published: 2021-10-23
 tags: ["C++"]
 category: "C++的一些事"
 draft: false
+description: "整理 C++ 学习中遇到的常见问题与易混淆点,第一期。"
+image: "assets/images/covers/cpp.jpg"
 ---
 
 ## 前言

@@ -20,7 +20,7 @@ export const siteConfig: SiteConfig = {
 		src: "assets/images/banner.jpg",
 		position: "center",
 		credit: {
-			enable: true,
+			enable: false,
 			text: "",
 			url: "",
 		},
@@ -54,6 +54,7 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
+		LinkPreset.About,
 		{
 			name: "GitHub",
 			url: "https://github.com/Oreofilling",
@@ -82,5 +83,7 @@ export const licenseConfig: LicenseConfig = {
 };
 
 export const expressiveCodeConfig: ExpressiveCodeConfig = {
-	theme: "github-dark",
+	// [亮色主题, 暗色主题],跟随站点明暗切换
+	lightTheme: "catppuccin-latte",
+	darkTheme: "catppuccin-mocha",
 };

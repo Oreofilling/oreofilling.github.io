@@ -4,6 +4,8 @@ published: 2022-05-15
 tags: ["总结"]
 category: "总结"
 draft: false
+description: "一次周赛的复盘笔记:每道题的思路、卡壳的地方和赛后的补题总结。"
+image: "assets/images/covers/practice.jpg"
 ---
 
 这次周赛和双周赛真的是惨不忍睹,真切地感受到自己与别人之间的差距,状态是一方面,感觉自己的思路真的是太局限了,看题解会做但是为什么比赛的时候想不到呢?我觉得有以下原因:

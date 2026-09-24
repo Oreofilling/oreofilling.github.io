@@ -4,6 +4,8 @@ published: 2022-06-10
 tags: ["C++"]
 category: "C++的一些事"
 draft: false
+description: "C++ 随机数相关函数的使用笔记:rand 的局限与 C++11 随机库的用法。"
+image: "assets/images/covers/cpp.jpg"
 ---
 
 ## 前言

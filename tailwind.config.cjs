@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Roboto", "sans-serif", ...defaultTheme.fontFamily.sans],
+        sans: ["Roboto", "LXGW WenKai Screen", "sans-serif", ...defaultTheme.fontFamily.sans],
       },
     },
   },

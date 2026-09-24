@@ -118,5 +118,6 @@ export type CommentConfig = {
 };
 
 export type ExpressiveCodeConfig = {
-	theme: string;
+	lightTheme: string;
+	darkTheme: string;
 };

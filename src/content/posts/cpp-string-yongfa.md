@@ -4,6 +4,8 @@ published: 2021-10-30
 tags: ["C++"]
 category: "C++的一些事"
 draft: false
+description: "C++ string 的常用操作总结:拼接、查找、截取与转换。"
+image: "assets/images/covers/cpp.jpg"
 ---
 
 ## C++的string标准库

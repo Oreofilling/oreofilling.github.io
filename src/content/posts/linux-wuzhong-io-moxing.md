@@ -4,6 +4,8 @@ published: 2022-11-02
 tags: ["Linux"]
 category: "Linux网络"
 draft: false
+description: "五种 IO 模型的对比:阻塞、非阻塞、IO 多路复用、信号驱动与异步 IO。"
+image: "assets/images/covers/linux.jpg"
 ---
 
 IO模型的选择在Linux网络编程中十分重要，在Unix/Linux环境中主要提供了五种不同的IO模型，分别是阻塞式IO、非阻塞式IO、IO多路复用、信号驱动式IO和异步IO。

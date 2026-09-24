@@ -4,6 +4,8 @@ published: 2022-05-09
 tags: ["算法", "刷题"]
 category: "刷题日常"
 draft: false
+description: "滑动窗口技巧总结:适用场景与模板写法。"
+image: "assets/images/covers/practice.jpg"
 ---
 
 ### 题目链接:https://leetcode-cn.com/problems/subarray-product-less-than-k/

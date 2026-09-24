@@ -2,6 +2,8 @@
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+// 中文:霞鹜文楷屏幕版(GB 简体子集,按 unicode-range 分片按需加载)
+
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import { profileConfig, siteConfig } from "@/config";
@@ -17,6 +19,7 @@ import {
 } from "../constants/constants";
 import { defaultFavicons } from "../constants/icon";
 import type { Favicon } from "../types/config";
+import { resolveAssetUrl } from "../utils/asset-utils";
 import { pathsEqual, url } from "../utils/url-utils";
 import "katex/dist/katex.css";
 
@@ -42,10 +45,10 @@ if (!banner || typeof banner !== "string" || banner.trim() === "") {
 	banner = siteConfig.banner.src;
 }
 
-// TODO don't use post cover as banner for now
-banner = siteConfig.banner.src;
-
 const enableBanner = siteConfig.banner.enable;
+
+// 解析当前页面 banner(文章头图或全局 banner)为绝对地址,用于社交分享卡片
+const ogImage = enableBanner ? await resolveAssetUrl(banner, Astro.site) : undefined;
 
 let pageTitle: string;
 if (title) {
@@ -98,6 +101,8 @@ const bannerOffset =
 		<meta property="twitter:url" content={Astro.url}>
 		<meta name="twitter:title" content={pageTitle}>
 		<meta name="twitter:description" content={description || pageTitle}>
+		{ogImage && <meta property="og:image" content={ogImage} />}
+		{ogImage && <meta name="twitter:image" content={ogImage} />}
 
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />

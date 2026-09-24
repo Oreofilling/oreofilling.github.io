@@ -4,6 +4,8 @@ published: 2022-06-05
 tags: ["算法"]
 category: "算法"
 draft: false
+description: "近期学到的新东西汇总,零散但值得记下来的知识点。"
+image: "assets/images/covers/algo.jpg"
 ---
 
 刚刚结束了这次的周赛，最后一题还是没有写出来，但是学到了关于字符串的一些新知识：

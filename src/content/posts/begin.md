@@ -4,6 +4,8 @@ published: 2021-06-14
 tags: ["随笔"]
 category: "生活"
 draft: false
+description: "博客的第一篇文章,从这里开始记录。"
+image: "assets/images/covers/life.jpg"
 ---
 
 #### 开始

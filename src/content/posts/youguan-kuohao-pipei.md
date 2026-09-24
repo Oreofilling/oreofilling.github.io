@@ -4,6 +4,8 @@ published: 2022-05-09
 tags: ["算法", "刷题"]
 category: "刷题日常"
 draft: false
+description: "括号匹配问题的解法整理,栈的经典应用。"
+image: "assets/images/covers/practice.jpg"
 ---
 
 虽然自己一看到括号匹配的问题就想到了栈处理,但是实际上还需要想到动态规划这一思想,别把思维局限在里面了.

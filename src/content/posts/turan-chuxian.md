@@ -4,6 +4,8 @@ published: 2022-10-08
 tags: ["随笔"]
 category: "生活"
 draft: false
+description: "久违的更新,记一段突然想说的话。"
+image: "assets/images/covers/life.jpg"
 ---
 
 最近几个月一直没有更新，懒是主要因素，还有一个是工作上太忙了，留给自己思考的时间已经少的不能再少了。为什么突然现在想起来要写点什么，可能也是心血来潮。说说最近几个月自己干了些啥事吧。

@@ -4,6 +4,8 @@ published: 2022-05-09
 tags: ["算法", "刷题"]
 category: "刷题日常"
 draft: false
+description: "刷题遇到的动态规划问题集合,附状态设计与转移思路。"
+image: "assets/images/covers/practice.jpg"
 ---
 
 今天刷了几道dp问题,记一下.

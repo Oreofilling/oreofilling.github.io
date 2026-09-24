@@ -4,6 +4,8 @@ published: 2021-10-31
 tags: ["Linux"]
 category: "Linux网络"
 draft: false
+description: "套接字编程入门第一篇:从 socket API 到一个最小的 TCP 例子。"
+image: "assets/images/covers/linux.jpg"
 ---
 
 ### 前言
